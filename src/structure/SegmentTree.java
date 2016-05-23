@@ -1,7 +1,11 @@
 package structure;
 
-/**
- * Created by shouhm on 16/4/3.
- */
 public class SegmentTree {
+    static abstract public class RangeOp {
+        abstract public RangeOp operPlus(RangeOp op);
+    }
+    static abstract public class RangeValue {
+        abstract public RangeValue operOnValue(RangeOp op);
+        abstract public RangeValue valuePlus(RangeValue value);
+    }
 }
