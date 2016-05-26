@@ -5,9 +5,6 @@ import java.math.*;
 
 import graph.Graph.Edge;
 
-/**
- * Created by shouhm on 16/5/14.
- */
 public class TarjanSCC {
 
     static int N;

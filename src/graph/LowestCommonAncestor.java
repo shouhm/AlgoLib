@@ -13,9 +13,12 @@ public class LowestCommonAncestor {
     public ArrayList<Integer>[] g;
     public int maxH;
 
-    public LowestCommonAncestor(int n, int root, List<Edge> edges) {
+    public LowestCommonAncestor(int n, int rootNode, List<Edge> edges) {
         N = n;
+        root = rootNode;
         g = Graph.getNonDirectedAdjList(n, edges);
+
+        dep = new int[N+1];
         log = new int[N+1];
         log[1] = 0; for (int i = 2; i <= n; i ++) log[i] = log[i/2] + 1;
         maxH = log[N] + 2;
@@ -52,23 +55,32 @@ public class LowestCommonAncestor {
 
     public int lca(int x, int y) {
         if (dep[x] > dep[y]) { int t = x; x = y; y = t; }
+
+        //System.out.println("before swim: " + x + " " + y);
         y = ancestor(y, dep[y] - dep[x]);
+
+        //System.out.println("after swim: " + x + " " + y);
+
         if (x == y) return x;
-        int low = 1, high = dep[x];
-        while (low < high) {
-            int level = log[high - low];
+        int top = 1, bottom = dep[x]-1, ans = -1;
+        while (top <= bottom) {
+
+            //System.out.println("top = " + top + " bottom = " + bottom);
+
+            int level = log[bottom - top + 1];
             int lx = anc[x][level], ly = anc[y][level];
-            int mid = high - (1 << level);
-        }
-        /*
-        while (low + 1 < high) {
-            int level = log[high - low - 1];
-            int lx = anc[x][level], ly = anc[y][level];
-            int mid = high - (1 << level);
-            if (lx == ly) low = mid; else {
-                high = mid; x = lx; y = ly;
+
+            int mid = bottom - (1 << level) + 1;
+
+            //System.out.println("mid try = " + mid + " lx = " + lx + " ly = " + ly);
+            if (lx == ly) {
+                ans = lx;
+                top = mid + 1;
+            } else {
+                bottom = mid - 1;
+                x = lx; y = ly;
             }
-        }*/
-        return anc[x][log[high - low]];
+        }
+        return ans;
     }
 }

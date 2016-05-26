@@ -32,11 +32,10 @@ public class Graph {
         ArrayList<Integer>[] g = new ArrayList[N];
         for (int x = 0; x < N; x ++)
             g[x] = new ArrayList<Integer>();
-        for (Edge e : edges)
-            if (e.in <= e.out) {
-                g[e.in].add(e.out);
-                g[e.out].add(e.in);
-            }
+        for (Edge e : edges) {
+            g[e.in].add(e.out);
+            g[e.out].add(e.in);
+        }
         return g;
     }
 
