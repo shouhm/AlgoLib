@@ -39,4 +39,15 @@ public class Graph {
             }
         return g;
     }
+
+    static public boolean[][] getNonDirectedAdjMat(int N, List<Edge> edges) {
+        boolean[][] g = new boolean[N][N];
+        for (int x = 0; x < N; x ++)
+            Arrays.fill(g[x], false);
+        for (Edge e : edges) {
+            g[e.in][e.out] = true;
+            g[e.out][e.in] = true;
+        }
+        return g;
+    }
 }
