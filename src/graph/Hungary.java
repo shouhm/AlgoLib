@@ -5,7 +5,7 @@ import java.util.*;
 /**
  * Created by shouhm on 16/6/18.
  */
-public class MaximumMatch {
+public class Hungary {
 
     static ArrayList<Integer>[] g;
     static int N;
@@ -13,7 +13,7 @@ public class MaximumMatch {
     static boolean[] vis;
     static int[] match;
 
-    static public int hungary(int n, ArrayList<Integer>[] graph) {
+    static public int maximumMatch(int n, ArrayList<Integer>[] graph) {
         N = n;
         g = graph;
         vis = new boolean[N];
